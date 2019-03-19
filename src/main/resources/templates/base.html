@@ -1,5 +1,7 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <div th:fragment="header">
         <!-- Required meta tags -->
@@ -25,25 +27,33 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
+            <li class="nav-item" sec:authorize="isAuthenticated()">
+                <a class="nav-link" href="#">Welcome <span
+                        th:text="${#authentication.name}"></span></a>
+            </li>
             <li class="nav-item active">
                 <a class="nav-link" href="/">Home</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item" sec:authorize="hasAuthority('ADMIN')">
                 <a class="nav-link" href="/add">Add A Course</a>
+            </li>
+            <li class="nav-item" sec:authorize="!isAuthenticated()">
+                <a class="nav-link" href="/register">Register</a>
+            </li>
+            <li class="nav-item" sec:authorize="!isAuthenticated()">
+                <a class="nav-link" href="/login">Login</a>
+            </li>
+            <li class="nav-item" sec:authorize="isAuthenticated()">
+                <a class="nav-link" href="/logout">Logout</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/about">About Us</a>
             </li>
         </ul>
     </div>
-    <div>
-        <a href="/logout">Logout</a>
-    </div>
 </nav>
 
-
-
-<div align="center" th:fragment="footer"> copyright 2019
+<div align="center" th:fragment="footer">Copyright 2019
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script crossorigin="anonymous"
