@@ -21,21 +21,21 @@ public class HomeController {
     @GetMapping("/register")
     public String showRegistrationPage(Model model){
         model.addAttribute("user",new User());
-        return "registration";
+        return "register";
     }
 
     @PostMapping("/register")
-    public String processRegistrationPage(@Valid @ModelAttribute("user") User user, BindingResult result, Model model){
-        //model.addAttribute("user", user);
+    public String processRegistrationPage(@Valid @ModelAttribute("user") User user, BindingResult result, Model model, @RequestParam("password") String pw){
+        System.out.println("pw: " + pw);
         if(result.hasErrors()){
-            return "registration";
+//            model.addAttribute("user", user);
+            return "register";
         } else {
             userService.saveUser(user);
             model.addAttribute("message", "User Account Created");
         }
         return "redirect:/";
     }
-
 
     @RequestMapping("/login")
     public String login(){

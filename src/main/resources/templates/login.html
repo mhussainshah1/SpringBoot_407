@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" >
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="base::header">
     <title>login</title>
 </head>
 <body>
 <div th:replace="base:: nav"></div>
-<div class="container" align="center">
+<div align="center" class="container">
     <h1>Login</h1>
     <div th:if="${param.error}">
         Invalid username or password
@@ -13,21 +13,22 @@
     <div th:if="${param.logout}">
         You have been logged out
     </div>
-    <form th:action="@{/login}" method="post">
+    <form method="post" th:action="@{/login}">
 
         <div class="form-group row">
-            <label for="username" class="col-sm-2 col-form-label">Username: </label>
+            <label class="col-sm-2 col-form-label" for="username">Username: </label>
             <div class="col-sm-10">
-                <input type="text" class="form-control-plaintext" id="username" name ="username"value="User Name">
+                <input class="form-control-plaintext" id="username" name="username" type="text" value="User Name">
             </div>
         </div>
         <div class="form-group row">
-            <label for="password" class="col-sm-2 col-form-label">Password:</label>
+            <label class="col-sm-2 col-form-label" for="password">Password:</label>
             <div class="col-sm-10">
-                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                <input class="form-control" id="password" name="password" placeholder="Password" type="password">
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button><br/>
+        <button class="btn btn-primary" type="submit">Submit</button>
+        <br/>
         <a href="/register">Register here</a>
 
     </form>

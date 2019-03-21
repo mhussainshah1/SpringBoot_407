@@ -4,55 +4,52 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.NotEmpty;
 import java.util.Collection;
 
 @Entity
-@Table(name="User_Data")
+@Table(name = "User_Data")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @NotNull
+    @NotEmpty
     @Email
-    @Column(name="email", nullable = false)
+    @Column(name = "email", nullable = false)
     private String email;
 
-    @NotNull
-    @Size(min=3)
-    @Column(name="password")
+    @NotEmpty
+    @ValidPassword
+    @Column(name = "password")
     private String password;
 
-    @NotNull
-    @Size(min=3)
-    @Column(name="first_name")
+    @NotEmpty
+    @Column(name = "first_name")
     private String firstName;
 
-    @NotNull
-    @Size(min=3)
-    @Column(name="last_name")
+    @NotEmpty
+    @Column(name = "last_name")
     private String lastName;
 
     @Column(name = "enabled")
     private boolean enabled;
 
-    @NotNull
-    @Size(min=3)
-    @Column(name="username")
+    @NotEmpty
+    @Column(name = "username")
     private String username;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable( joinColumns = @JoinColumn(name="user_id"),
-                inverseJoinColumns = @JoinColumn(name="role_id"))
+    @JoinTable(joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
 
     public User() {
     }
 
     public User(String email, String password, String firstName, String lastName, boolean enabled, String username) {
-        this.setEmail(email);;
+        this.setEmail(email);
+        ;
         this.setPassword(password);
         this.setFirstName(firstName);
         this.setLastName(lastName);
