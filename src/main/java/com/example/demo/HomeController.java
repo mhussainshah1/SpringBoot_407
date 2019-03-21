@@ -31,6 +31,7 @@ public class HomeController {
 //            model.addAttribute("user", user);
             return "register";
         } else {
+            user.encode(pw);
             userService.saveUser(user);
             model.addAttribute("message", "User Account Created");
         }

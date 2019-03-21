@@ -49,8 +49,8 @@ public class User {
 
     public User(String email, String password, String firstName, String lastName, boolean enabled, String username) {
         this.setEmail(email);
-        ;
         this.setPassword(password);
+        this.encode(password);
         this.setFirstName(firstName);
         this.setLastName(lastName);
         this.setEnabled(enabled);
@@ -78,8 +78,9 @@ public class User {
     }
 
     public void setPassword(String password) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        this.password = passwordEncoder.encode(password);
+//        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+//        this.password = passwordEncoder.encode(password);
+        this.password = password;
     }
 
     public String getFirstName() {
@@ -120,5 +121,10 @@ public class User {
 
     public void setRoles(Collection<Role> roles) {
         this.roles = roles;
+    }
+
+    public void encode(String password){
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        this.password = passwordEncoder.encode(password);
     }
 }
