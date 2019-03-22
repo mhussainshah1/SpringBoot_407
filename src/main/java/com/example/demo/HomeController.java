@@ -33,9 +33,9 @@ public class HomeController {
         } else {
             user.encode(pw);
             userService.saveUser(user);
-            model.addAttribute("message", "User Account Created");
+            model.addAttribute("message", "New User Account Created");
         }
-        return "redirect:/login";
+        return "login";
     }
 
     @RequestMapping("/login")
