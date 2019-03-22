@@ -3,6 +3,7 @@ package com.example.demo;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.persistence.*;
+import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.util.Collection;
@@ -32,6 +33,7 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
+    @AssertTrue
     @Column(name = "enabled")
     private boolean enabled;
 
