@@ -15,4 +15,5 @@
 
 .error-message{
     color: red;
+    font-style: Italic;
 }

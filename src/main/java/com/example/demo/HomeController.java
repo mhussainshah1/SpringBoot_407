@@ -109,6 +109,11 @@ public class HomeController {
         return "termsandconditions";
     }
 
+    @PostMapping("/forgot-password")
+    public String forgetPassword(){
+        return "/";
+    }
+
     @GetMapping("/about")
     public String getAbout(){
         return "about";
