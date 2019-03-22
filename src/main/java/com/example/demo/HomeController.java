@@ -104,7 +104,7 @@ public class HomeController {
         return "redirect:/";
     }
 
-    @GetMapping("/termsandcondition")
+    @GetMapping("/termsandconditions")
     public String getTermsAndCondition(){
         return "termsandconditions";
     }
