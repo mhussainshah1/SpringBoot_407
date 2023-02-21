@@ -19,15 +19,15 @@ public class HomeController {
     UserService userService;
 
     @GetMapping("/register")
-    public String showRegistrationPage(Model model){
-        model.addAttribute("user",new User());
+    public String showRegistrationPage(Model model) {
+        model.addAttribute("user", new User());
         return "register";
     }
 
     @PostMapping("/register")
-    public String processRegistrationPage(@Valid @ModelAttribute("user") User user, BindingResult result, Model model, @RequestParam("password") String pw){
+    public String processRegistrationPage(@Valid @ModelAttribute("user") User user, BindingResult result, Model model, @RequestParam("password") String pw) {
         System.out.println("pw: " + pw);
-        if(result.hasErrors()){
+        if (result.hasErrors()) {
 //            model.addAttribute("user", user);
             return "register";
         } else {
@@ -39,19 +39,19 @@ public class HomeController {
     }
 
     @RequestMapping("/login")
-    public String login(){
+    public String login() {
         return "login";
     }
 
     //ASK DAVE!!!
     @RequestMapping("/admin")
-    public String admin(){
+    public String admin() {
         return "admin";
     }
 
     //ASK DAVE!!!
     @RequestMapping("/secure")
-    public String secure(Principal principal, Model model){
+    public String secure(Principal principal, Model model) {
         User myuser = ((CustomerUserDetails)
                 ((UsernamePasswordAuthenticationToken) principal)
                         .getPrincipal())
@@ -63,10 +63,10 @@ public class HomeController {
     @RequestMapping("/")
     public String listCourses(Model model) {
         model.addAttribute("courses", courseRepository.findAll()); //generate select * statement
-       if(userService.getUser() != null){
-           model.addAttribute("user_id", userService.getUser().getId());
-       }
-       return "list";
+        if (userService.getUser() != null) {
+            model.addAttribute("user_id", userService.getUser().getId());
+        }
+        return "list";
     }
 
     @GetMapping("/add")
@@ -99,23 +99,23 @@ public class HomeController {
     }
 
     @RequestMapping("/delete/{id}")
-    public String delCourse(@PathVariable("id") long id){
+    public String delCourse(@PathVariable("id") long id) {
         courseRepository.deleteById(id);
         return "redirect:/";
     }
 
     @GetMapping("/termsandconditions")
-    public String getTermsAndCondition(){
+    public String getTermsAndCondition() {
         return "termsandconditions";
     }
 
-    @PostMapping("/forgot-password")
-    public String forgetPassword(){
-        return "/";
+    @GetMapping("/forgot-password")
+    public String forgetPassword() {
+        return "redirect:/";
     }
 
     @GetMapping("/about")
-    public String getAbout(){
+    public String getAbout() {
         return "about";
     }
 }

@@ -125,7 +125,7 @@ public class User {
         this.roles = roles;
     }
 
-    public void encode(String password){
+    public void encode(String password) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         this.password = passwordEncoder.encode(password);
     }

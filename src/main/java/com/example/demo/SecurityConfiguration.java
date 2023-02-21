@@ -15,7 +15,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
-    public static BCryptPasswordEncoder passwordEncoder(){
+    public static BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -26,15 +26,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private UserRepository appUserRepository;
 
     @Override
-    public UserDetailsService userDetailsServiceBean() throws Exception{
+    public UserDetailsService userDetailsServiceBean() throws Exception {
         return new SSUserDetailsService(appUserRepository);
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception{
+    protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/","/termsandconditions","/style.css", "/css/**","/js/**","/h2-console/**", "/register", "/about").permitAll()
+                .antMatchers("/", "/termsandconditions", "/style.css", "/css/**", "/js/**", "/h2-console/**", "/register", "/about").permitAll()
 // , "/detail/** "
 //                .access("hasAnyAuthority('USER','ADMIN')")
 //                .antMatchers("/admin").access("hasAuthority('ADMIN')")
@@ -54,7 +54,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void  configure(AuthenticationManagerBuilder auth) throws Exception{
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsServiceBean())
                 .passwordEncoder(passwordEncoder());
        /* auth.inMemoryAuthentication()
