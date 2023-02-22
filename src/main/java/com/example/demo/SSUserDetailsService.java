@@ -7,9 +7,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
-import java.util.HashSet;
-import java.util.Set;
+import jakarta.transaction.Transactional;
+import java.util.*;
 
 @Transactional
 @Service
@@ -25,10 +24,10 @@ public class SSUserDetailsService implements UserDetailsService {
         try {
             User appUser = userRepository.findByUsername(username);
             if (appUser == null) {
-                System.out.println("User not found with the provided username" + appUser.toString());
+                System.out.println("User not found with the provided username : " + appUser.toString());
                 return null;
             }
-            System.out.println("User from username " + appUser.toString());
+            System.out.println("User from username : " + appUser);
             return new CustomerUserDetails(appUser, getAuthorities(appUser));
 //            return new org.springframework.security.core.userdetails.User(
 //                    appUser.getUsername(),
@@ -39,13 +38,21 @@ public class SSUserDetailsService implements UserDetailsService {
         }
     }
 
+    private String[] getRoles(User appUser) {
+        List<String> roles = new ArrayList<>();
+        for (Role role : appUser.getRoles()) {
+            roles.add(role.getRole());
+        }
+        return Arrays.copyOf(roles.toArray(), roles.size(), String[].class);
+    }
+
     private Set<GrantedAuthority> getAuthorities(User appUser) {
         Set<GrantedAuthority> authorities = new HashSet<>();
         for (Role role : appUser.getRoles()) {
-            GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(role.getRole());
+            GrantedAuthority grantedAuthority = new SimpleGrantedAuthority("ROLE_" + role.getRole());
             authorities.add(grantedAuthority);
         }
-        System.out.println("User authorities are" + authorities.toString());
+        System.out.println("User authorities are : " + authorities.toString());
         return authorities;
     }
 }

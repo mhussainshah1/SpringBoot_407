@@ -2,19 +2,19 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="base::header">
+<head th:replace="~{base::header}">
     <title>Title</title>
 
 </head>
 
 <body>
-<div th:replace="base::nav"></div>
+<div th:replace="~{base::nav}"></div>
 
 <div class="container">
     <!--insert webpage content here-->
-    <h2 align="center">Terms And Conditions</h2>
+    <h2 class="text-center">Terms And Conditions</h2>
 </div>
 
-<div th:replace="base::footer"></div>
+<div th:replace="~{base::footer}"></div>
 </body>
 </html>

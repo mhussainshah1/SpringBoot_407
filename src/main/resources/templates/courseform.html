@@ -1,43 +1,54 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head th:replace="base::header">
+<head th:replace="~{base::header}">
     <title>Course Form</title>
-
 </head>
 
 <body>
-<div th:replace="base::nav"></div>
+<div th:replace="~{base::nav}"></div>
 <br/>
-<div class="container" align="center">
+<div class="container col-md-6 text-center">
     <h2>Course Form</h2><br/>
     <form action="#" method="post" th:action="@{/process}" th:object="${course}">
         <input th:field="*{id}" type="hidden"/>
-        <table class="table">
-            <tr>
-                <td>Title:</td>
-                <td><input th:field="*{title}" type="text"/></td>
-                <td><span th:errors="*{title}" th:if="${#fields.hasErrors('title')}"></span></td>
-            </tr>
-            <tr>
-                <td>Instructor:</td>
-                <td><input th:field="*{instructor}" type="text"/></td>
-                <td><span th:errors="*{instructor}" th:if="${#fields.hasErrors('instructor')}"></span></td>
-            </tr>
-            <tr>
-                <td> Description:</td>
-                <td><textarea rows="3" th:field="*{description}"></textarea></td>
-                <td><span th:errors="*{description}" th:if="${#fields.hasErrors('description')}"></span></td>
-            </tr>
-            <tr>
-                <td>Credits:</td>
-                <td><input th:field="*{credit}" type="number"/></td>
-                <td><span th:errors="*{credit}" th:if="${#fields.hasErrors('credit')}"></span></td>
-            </tr>
-        </table>
+
+        <div class="row mb-3 row">
+            <label class="col-sm-2 col-form-label" for="title">Title:</label>
+            <div class="col-sm-10 text-left">
+                <input class="form-control" id="title" th:field="*{title}" type="text"/>
+                <span class="error-message" th:errors="*{title}"
+                      th:if="${#fields.hasErrors('title')}"></span>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label" for="instructor">Instructor:</label>
+            <div class="col-sm-10 text-left">
+                <input class="form-control" id="instructor" th:field="*{instructor}" type="text"/>
+                <span class="error-message" th:errors="*{instructor}"
+                      th:if="${#fields.hasErrors('instructor')}"></span>
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label" for="description">Description:</label>
+            <div class="col-sm-10 text-left">
+                <textarea class="form-control" id="description" rows="3" th:field="*{description}"></textarea>
+                <span class="error-message" th:errors="*{description}"
+                      th:if="${#fields.hasErrors('description')}"></span>
+
+            </div>
+        </div>
+        <div class="mb-3 row">
+            <label class="col-sm-2 col-form-label" for="credits">Credits:</label>
+            <div class="col-sm-10 text-left">
+                <input class="form-control" id="credits" th:field="*{credit}" type="number"/>
+                <span class="error-message" th:errors="*{credit}" th:if="${#fields.hasErrors('credit')}"></span>
+            </div>
+        </div>
+
         <input type="submit" value="Submit"/>
     </form>
 </div>
 <br/>
-<div th:replace="base::footer"></div>
+<div th:replace="~{base::footer}"></div>
 </body>
 </html>

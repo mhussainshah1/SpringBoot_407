@@ -16,4 +16,14 @@
 .error-message {
     color: red;
     font-style: Italic;
+    font-weight: bold;
 }
+
+/*
+h2{
+    text-align: center;
+}
+
+div{
+    align-items: center;
+}*/
