@@ -13,8 +13,8 @@
     <form action="#" autocomplete="off" method="post" th:action="@{/register}" th:object="${user}">
 
         <p class="error-message"
-           th:if="${#fields.hasGlobalErrors()}"
            th:each="error : ${#fields.errors('global')}"
+           th:if="${#fields.hasGlobalErrors()}"
            th:text="${error}">Validation error</p>
 
         <div class="mb-3 row">
@@ -81,26 +81,24 @@
 
         <div class="mb-3 row form-check">
             <div class="col-sm-6 offset-sm-2">
-                <input class="form-check-input" id="enabled" type="checkbox" th:field="*{enabled}"/>
+                <input class="form-check-input" id="enabled" th:field="*{enabled}" type="checkbox"/>
                 <label class="form-check-label" for="enabled">
                     I agree with the <a href="/termsandconditions">terms and conditions</a> for Registration.
                 </label>
             </div>
-            <strong>
-                <span class="error-message" th:errors="*{enabled}"
-                      th:if="${#fields.hasErrors('enabled')}">Term Error</span>
-            </strong>
+            <span class="error-message" th:errors="*{enabled}"
+                  th:if="${#fields.hasErrors('enabled')}">Term Error</span>
         </div>
 
-        <button class="btn btn-primary" type="submit">Register</button>
+        <button class="btn btn-primary mb-3" type="submit">Register</button>
 
     </form>
 
-    <div class="row text-start">
-        <div class="col-md-12">
+    <div class="col text-center">
+        <div class="mb-3">
             Already registered? <a href="/" th:href="@{/login}">Login</a>
         </div>
-        <div class="col-md-12">
+        <div class="mb-3">
             Forgot password? <a href="/" th:href="@{/forgot-password}">Reset password</a>
         </div>
     </div>

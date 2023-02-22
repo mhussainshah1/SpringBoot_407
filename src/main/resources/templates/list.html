@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{base::header}">
     <title>List</title>
 
@@ -9,36 +9,33 @@
 <body>
 <div th:replace="~{base::nav}"></div>
 <!--All CRUD operations in one form-->
-<h2 class="text-center">Course List</h2><br/>
 <br/>
-<table class="table" style="width:100%">
-    <tr>
-        <th sec:authorize="hasRole('ADMIN')">Select</th>
-        <th>Title</th>
-        <th>Instructor</th>
-        <th>Credits</th>
-        <th sec:authorize="hasRole('ADMIN')">Actions</th>
-    </tr>
+<h2 class="text-center">Course List</h2><br/>
+<div class="container col-md-6 text-center">
+    <div class="mb-3 row">
+        <label class="col-sm-2 col-form-label" sec:authorize="hasRole('ADMIN')">Select</label>
+        <label class="col-sm-2 col-form-label">Title</label>
+        <label class="col-sm-4 col-form-label">Instructor</label>
+        <label class="col-sm-2 col-form-label">Credits</label>
+        <label class="col-sm-2 col-form-label" sec:authorize="hasRole('ADMIN')">Actions</label>
+    </div>
     <!--enhanced for loop-->
-    <tr th:each="course : ${courses}">
-        <td sec:authorize="hasRole('ADMIN')">
-            <input type="checkbox">
-        </td>
-        <td>
-            <a th:href="@{/detail/{id}(id=${course.id})}">[[${course.title}]]</a><!-- Read -->
-        </td>
-        <td th:text="${course.instructor}"></td>
-        <td th:text="${course.credit}"></td>
+    <div class="mb-3 row" th:each="course : ${courses}">
 
-        <td sec:authorize="hasRole('ADMIN')">
+        <input class="col-sm-2 form-check" id="select" sec:authorize="hasRole('ADMIN')" type="checkbox">
+        <a class="col-sm-2" th:href="@{/detail/{id}(id=${course.id})}">[[${course.title}]]</a><!-- Read -->
+        <label class="col-sm-4 col-form-label" for="select" th:text="${course.instructor}"></label>
+        <label class="col-sm-2 col-form-label" th:text="${course.credit}"></label>
+
+        <span class="col-sm-2" sec:authorize="hasRole('ADMIN')">
             <!--<span th:if="${user_id == course.user.id}">
                 </span>-->
             <a th:href="@{/update/{id}(id=${course.id})}">Edit</a>-<!-- Update -->
             <a th:href="@{/delete/{id}(id=${course.id})}">Delete</a><!-- Delete -->
-        </td>
+        </span>
 
-    </tr>
-</table>
+    </div>
+</div>
 <br/>
 <div th:replace="~{base::footer}"></div>
 </body>
