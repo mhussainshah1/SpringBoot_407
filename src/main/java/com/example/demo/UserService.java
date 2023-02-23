@@ -6,6 +6,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 @Service
 public class UserService {
@@ -33,13 +34,13 @@ public class UserService {
     }
 
     public void saveUser(User user) {
-        user.setRoles(Arrays.asList(roleRepository.findByRole("USER")));
+        user.setRoles(Collections.singletonList(roleRepository.findByRole("USER")));
         user.setEnabled(true);
         userRepository.save(user);
     }
 
     public void saveAdmin(User user) {
-        user.setRoles(Arrays.asList(roleRepository.findByRole("ADMIN")));
+        user.setRoles(Collections.singletonList(roleRepository.findByRole("ADMIN")));
         user.setEnabled(true);
         userRepository.save(user);
     }

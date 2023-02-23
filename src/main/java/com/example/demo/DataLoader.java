@@ -6,6 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
+import java.util.Collections;
 
 @Component
 public class DataLoader implements CommandLineRunner {
@@ -14,15 +15,12 @@ public class DataLoader implements CommandLineRunner {
 
     @Autowired
     RoleRepository roleRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     @Autowired
     CourseRepository repository;
-
     @Autowired
     UserService userService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public void run(String... args) throws Exception {
@@ -33,11 +31,11 @@ public class DataLoader implements CommandLineRunner {
         Role userRole = roleRepository.findByRole("USER");
 
         User user = new User("jim@jim.com", "Pa$$word2019", "jim", "jimmerson", true, "jim");
-        user.setRoles(Arrays.asList(userRole));
+        user.setRoles(Collections.singletonList(userRole));
         userRepository.save(user);
 
         user = new User("admin@admin.com", "Pa$$word2019", "Admin", "User", true, "admin");
-        user.setRoles(Arrays.asList(adminRole));
+        user.setRoles(Collections.singletonList(adminRole));
         userRepository.save(user);
 
         Course course = new Course("Astrophysics", "Neli D Tyson", "Just a course on stars", 3);

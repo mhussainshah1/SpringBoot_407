@@ -6,7 +6,7 @@ import java.util.Collection;
 
 public class CustomerUserDetails extends org.springframework.security.core.userdetails.User {
 
-    private User user;
+    private final User user;
 
     public CustomerUserDetails(User user, Collection<? extends GrantedAuthority> authorities) {
         super(user.getUsername(), user.getPassword(), authorities);

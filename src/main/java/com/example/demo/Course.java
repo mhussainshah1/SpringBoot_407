@@ -1,10 +1,9 @@
 package com.example.demo;
 
-import org.springframework.lang.NonNull;
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
+import org.springframework.lang.NonNull;
 
 @Entity
 public class Course {
